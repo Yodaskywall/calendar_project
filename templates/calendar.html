@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+	<h1> Calendar </h1>
+	<h2> {{ info.year }} </h2>
+	<h2> {{ info.months }} </h2>
+	<h2> {{ info.days }} </h2>
+
+
+	<div class="container">
+		{% for day in range(days) %}
+		{% endfor %}
+{% endblock content %}
