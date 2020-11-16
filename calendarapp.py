@@ -39,12 +39,32 @@ month_len = {
         "May" : 31,
         "June" : 30,
         "July" : 31,
-        "August" :318,
+        "August" :31,
         "September" : 30,
         "October" : 31,
         "November" : 30,
         "December" : 31
         }
+
+# 2020, 2021, 2022, 2023, 2024, 2025, ..., n
+# 2, 4, 5, 6, 0, 2
+
+
+def get_c(year):
+    c = 2
+    
+    for yr in range(2021,year+1):
+        if (yr-1) % 4 == 0:
+            c += 2
+
+        else:
+            c += 1
+
+        if c > 6:
+            c= c % 6 - 1
+
+    return c
+
 
 @app.route("/")
 @app.route("/home")
@@ -52,13 +72,13 @@ def hello():
     return render_template("layout.html")
 
 
-@app.route("/calendar/<int:year>/<int:month>")
-def calendar(year, month):
+@app.route("/calendar/<int:year>-int:week>")
+def calendar(year, week):
     info = {
             "year" : year,
-            "month" : month,
-            "months" : num_to_month[month],
-            "days" : month_len[num_to_month[month]]
+            "week" : week,
             }
+
+
 
     return render_template("calendar.html", info=info) 
