@@ -98,7 +98,20 @@ def hello():
 @app.route("/calendar/<int:year>-<int:week>")
 def calendar(year, week):
     day_n = week * 7 - get_c(year)
-    days = [[get_mon_day(d, year)[0], num_to_month[get_mon_day(d, year)[1]]] for d in range(day_n+1, day_n+8)]
+    days = [[get_mon_day(d, year)[0],
+       num_to_month[get_mon_day(d, year)[1]]] for d in range(day_n+1, day_n+8)]
+    
+    for i in range(len(days)):
+        if days[i][0] <= 0:
+            if (year-1) % 4 == 0:
+                d_ = 366 + days[i][0]
+            
+            else:
+                d_ = 365 + days[i][0]
+            
+            day_, month_ = get_mon_day(d_, year-1)
+            days[i] = [day_, num_to_month[month_]]
+    
     info = {
             "year" : year,
             "week" : week,

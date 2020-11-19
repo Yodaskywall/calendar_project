@@ -1,8 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-	
 	<h1> Calendar </h1>
 	<h2> {{ info.year }} </h2>
-	<h2> {{ info.days }} </h2>
+	<div class="row">
+		{% for day, month in info.days %}
+			<div class="col-md">
+			<p> {{ month }} </p>
+			<h3> {{ day }} </h3>
+			</div>
+		{% endfor %}
+	</div>
 
 {% endblock content %}
