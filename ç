@@ -180,7 +180,7 @@ def hello():
 @app.route("/calendar/<int:year>-<int:week>")
 def calendar(year, week):
     day_n = week * 7 - get_c(year)
-    days = [[get_mon_day(d, year)[0], num_to_month[get_mon_day(d, year)[1]]] for d in range(day_n+1, day_n+8)]
+    days = [list(get_mon_day(d, year)[0], num_to_month[get_mon_day(d, year)[1]) for d in range(day_n+1, day_n+8)]
     info = {
             "year" : year,
             "week" : week,
