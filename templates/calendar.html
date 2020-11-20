@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-	<h1> Calendar </h1>
-	<h2> {{ info.year }} </h2>
+	<h1> {{ info.year }} </h1>
 	<div class="row">
 		{% for day, month in info.days %}
-			<div class="col-md">
-			<p> {{ month }} </p>
+			<div class="h-100 col-md daycol">
+			<h2> {{ month }} </h2>
 			<h3> {{ day }} </h3>
+			<button type="button" class="btn btn-outline-primary">Add event</button>
 			</div>
 		{% endfor %}
 	</div>

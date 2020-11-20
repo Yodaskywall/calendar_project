@@ -1,5 +1,30 @@
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from forms import RegistrationForm, LoginForm
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "5791628bb0b13ce0c676dfde280a245"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+db = SQLAlchemy(app)
+
+class User(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+
+    def __repr__(self):
+        return f"User({self.username}, {self.email})"
+
+
+class Event(db.model):
+    id = db.Column(db.Integer, priamary_key=True)
+    name = db.Column(db.String(20), unique=True, nullable=False)
+    date = db.Column(db,DateTime, nullable=False)
+    time = db.Column(db.Interval, nullable=False)
+
+    def __repr__(self):
+        return f"Event({self.name}, {self.date}, {self.user})"
 
 month_to_num = {
         "January" : 1,
@@ -17,18 +42,18 @@ month_to_num = {
         }
 
 num_to_month = {
-        1 : "January",
-        2 : "February",
-        3 : "March",
-        4 : "April",
+        1 : "Jan",
+        2 : "Feb",
+        3 : "Mar",
+        4 : "Apr",
         5 : "May",
-        6 : "June",
-        7 : "July",
-        8 : "August",
-        9 : "September",
-        10 : "October",
-        11 : "November",
-        12 : "December"
+        6 : "Jun",
+        7 : "Jul",
+        8 : "Aug",
+        9 : "Sep",
+        10 : "Oct",
+        11 : "Nov",
+        12 : "Dec"
         }
 
 month_len = {
@@ -94,6 +119,26 @@ def get_week(year, week):
 def hello():
     return render_template("layout.html")
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash("Account created for {form.username.data}!", "success")
+        return redirect(url_for("home"))
+    return render_template("register.html", form=form)
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == "admin@blog.com" and form.password.data == "password":
+            flash("You have been logged in!", "success")
+            return redirect(url_for("home"))
+
+        else:
+            flash("Login Unsuccessful. Please check username and password", "danger")
+        return render_template("login.html", form=form)
 
 @app.route("/calendar/<int:year>-<int:week>")
 def calendar(year, week):
@@ -121,3 +166,6 @@ def calendar(year, week):
 
 
     return render_template("calendar.html", info=info) 
+
+if __name__ == "__main__":
+    app.run(debug.True)

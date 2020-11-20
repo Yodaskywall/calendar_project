@@ -1,28 +1,15 @@
-import os
 from flask import Flask
-print("AAAAAAAAA")
-def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=True)
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
-    app.config.from_mapping(
-            SECRET_KEY="dev",
-            DATABASE=os.path.join(app.instance_path, "calendar.sqlite")
-            )
+app = Flask(__name__)
+app.config["SECRET_KEY"] = '5791628bb0b13ce0c676dfde280ba245'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.fb"
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
 
-    if test_config is None:
-        app.config.from_pyfile("config.py", silent=True)
-
-    else:
-        app.config.from_mapping(test_config)
-
-    try:
-        os.makedirs(app.instance_path)
-
-    except OSERROR:
-        pass
-
-    @app.route("/hello")
-    def hello():
-        return "Hello, World!"
-
-    return app
+from flaskblog import routes
