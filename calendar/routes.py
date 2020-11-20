@@ -1,30 +1,10 @@
-from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm, LoginForm
-from flask import Flask, render_template, url_for
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "5791628bb0b13ce0c676dfde280a245"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
-db = SQLAlchemy(app)
-
-class User(db.model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-
-    def __repr__(self):
-        return f"User({self.username}, {self.email})"
-
-
-class Event(db.model):
-    id = db.Column(db.Integer, priamary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
-    date = db.Column(db,DateTime, nullable=False)
-    time = db.Column(db.Interval, nullable=False)
-
-    def __repr__(self):
-        return f"Event({self.name}, {self.date}, {self.user})"
+import os
+import secrets
+import PIL from Image
+from flask import render_template, url_for, flash, redirect, request
+from calendar import app, db, bcrypt
+from calendar.models import User, Event
+from flask_login import login_user, current_user, logout_user, login_required
 
 month_to_num = {
         "January" : 1,
