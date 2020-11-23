@@ -19,9 +19,9 @@ class User(db.Model, UserMixin):
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
+    description = db.Column(db.String(20), unique=True, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    time = db.Column(db.Interval, nullable=False)
+    duration = db.Column(db.Interval, nullable=False)
 
     def __repr__(self):
         return f"Event({self.name}, {self.date}, {self.user})"
