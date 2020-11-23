@@ -1,9 +1,9 @@
 import os
 import secrets
-import PIL from Image
+from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
-from calendar import app, db, bcrypt
-from calendar.models import User, Event
+from calendarapp import app, db, bcrypt
+from calendarapp.models import User, Event
 from flask_login import login_user, current_user, logout_user, login_required
 
 month_to_num = {
@@ -97,7 +97,7 @@ def get_week(year, week):
 @app.route("/")
 @app.route("/home")
 def hello():
-    return render_template("layout.html")
+    return "Home"
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -120,7 +120,7 @@ def login():
             flash("Login Unsuccessful. Please check username and password", "danger")
         return render_template("login.html", form=form)
 
-@app.route("/calendar/<int:year>-<int:week>")
+@app.route("/<int:year>-<int:week>")
 def calendar(year, week):
     day_n = week * 7 - get_c(year)
     days = [[get_mon_day(d, year)[0],
