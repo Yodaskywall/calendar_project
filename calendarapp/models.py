@@ -26,5 +26,5 @@ class Event(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     def __repr__(self):
-        return f"Event({self.name}, {self.date}, {self.author})"
+        return f"Event({self.description}, {self.date}"
 

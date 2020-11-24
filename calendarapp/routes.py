@@ -6,6 +6,7 @@ from calendarapp.forms import LoginForm, RegistrationForm, EventForm
 from calendarapp import app, db, bcrypt
 from calendarapp.models import User, Event
 from flask_login import login_user, current_user, logout_user, login_required
+import datetime
 
 month_to_num = {
         "January" : 1,
@@ -159,13 +160,15 @@ def calendar(year, week):
     return render_template("calendar.html", info=info)
 
 
-@app.route("/add_event/<int:year>-<int:week>", methods=["GET", "POST"])
+@app.route("/add_event/<int:year>-<int:month>-<int:day>", methods=["GET", "POST"])
 @login_required
-def add_event(year, week):
+def add_event(year, month, day):
     form = EventForm()
     if form.validate_on_submit():
-        event = Event(description=form.description.data, start_time=form.start_time.data, duration=form.duration.data, user=current_user)
+        st = datetime.datetime(year=year, month=month, day=day, hour=int(form.start_time.data[:2]), minute=int(form.start_time.data[3:]))
+        td = datetime.timedelta(minutes=int(form.duration.data))
+        event = Event(description=form.description.data, date=st, duration=td, user=current_user)
         db.session.add(event)
-        db.sessiom.commit()
+        db.session.commit()
         flash("Event added", "info")
     return render_template("add_event.html", form=form)
