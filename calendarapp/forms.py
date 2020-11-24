@@ -33,8 +33,8 @@ class LoginForm(FlaskForm):
 
 class EventForm(FlaskForm):
     description = StringField("Name", validators=[DataRequired(), Length(min=1, max=100)])
-    start_time = StringField("Start Time", validators=[DataRequired()], default="Enter start time (hh:mm)")
-    duration = DecimalField("Duration", validators=[DataRequired(), NumberRange(min=0.0001, max=1440)])
+    start_time = StringField("Start Time (hh:mm)", validators=[DataRequired()])
+    duration = DecimalField("Duration (min)", validators=[DataRequired(), NumberRange(min=0.0001, max=1440)])
     submit = SubmitField("Add event")
 
     def validate_start_time(self, start_time):

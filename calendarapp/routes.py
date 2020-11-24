@@ -38,6 +38,10 @@ num_to_month = {
         12 : "Dec"
         }
 
+
+month_to_num = {v: k for k, v in num_to_month.items()}
+
+
 month_len = {
         1 : 31,
         2 : 28,
@@ -152,7 +156,8 @@ def calendar(year, week):
     info = {
             "year" : year,
             "week" : week,
-            "days" : days
+            "days" : days,
+            "mons" : [month_to_num[m[1]] for m in days]
             }
 
 
@@ -171,4 +176,5 @@ def add_event(year, month, day):
         db.session.add(event)
         db.session.commit()
         flash("Event added", "info")
+        return redirect(url_for("home"))
     return render_template("add_event.html", form=form)

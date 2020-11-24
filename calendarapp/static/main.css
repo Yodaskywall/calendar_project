@@ -21,7 +21,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .daycol {
-  background-color: #FFF;
+  background-color: #CEECF5;
+  margin-left: 20px;
+  padding-bottom: 40%;
 }
 
 .site-header .navbar-nav .nav-link.active {

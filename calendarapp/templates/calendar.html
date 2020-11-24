@@ -6,7 +6,7 @@
 			<div class="h-100 col-md daycol">
 			<h2> {{ month }} </h2>
 			<h3> {{ day }} </h3>
-			<button type="button" class="btn btn-outline-primary">Add event</button>
+			<a type="button" href="{{ url_for("add_event", year=info.year, day=day, month=info.mons[loop.index0]) }}" class="btn btn-outline-primary">Add event</a>
 			</div>
 		{% endfor %}
 	</div>
