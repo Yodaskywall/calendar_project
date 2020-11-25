@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    events = db.relationship("Event", backref="user", lazy=True)
 
     def __repr__(self):
         return f"User({self.username}, {self.email})"
@@ -22,7 +23,8 @@ class Event(db.Model):
     description = db.Column(db.String(20), unique=True, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     duration = db.Column(db.Interval, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     def __repr__(self):
-        return f"Event({self.name}, {self.date}, {self.user})"
+        return f"Event({self.name}, {self.date}, {self.author})"
 

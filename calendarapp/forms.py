@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DatetimeField, DecimalField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, DecimalField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 from calendarapp.models import User
 
@@ -33,5 +33,6 @@ class LoginForm(FlaskForm):
 
 class EventForm(FlaskForm):
     description = StringField("Description", validators=[DataRequired(), Length(min=1, max=100)])
-    start_time = DateTimeField("Start Time", validators=[DataRequired()]
-    duration = DecimalField("Duration (min)", validators=[DataRequired(), NumberRange(min=0.0001, max=1440)])
+    start_time = DateTimeField("Start Time", validators=[DataRequired()], default="Enter start time (hh:mm)")
+    duration = DecimalField("Duration", validators=[DataRequired(), NumberRange(min=0.0001, max=1440)], default="Enter duration(min)... ")
+    submit = SubmitField("Add event")

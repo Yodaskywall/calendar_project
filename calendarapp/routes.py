@@ -2,7 +2,7 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
-from calendarapp.forms import LoginForm, RegistrationForm
+from calendarapp.forms import LoginForm, RegistrationForm, EventForm
 from calendarapp import app, db, bcrypt
 from calendarapp.models import User, Event
 from flask_login import login_user, current_user, logout_user, login_required
@@ -156,4 +156,16 @@ def calendar(year, week):
 
 
 
-    return render_template("calendar.html", info=info) 
+    return render_template("calendar.html", info=info)
+
+
+@app.route("/add_event/<int:year>-<int:week>", methods=["GET", "POST"])
+@login_required
+def add_event(year, week):
+    form = EventForm()
+    if form.validate_on_submit():
+        event = Event(description=form.description.data, start_time=form.start_time.data, duration=form.duration.data, user=current_user)
+        db.session.add(event)
+        db.sessiom.commit()
+        flash("Event added", "info")
+    return render_template("add_event.html", form=form)
