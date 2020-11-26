@@ -7,6 +7,7 @@ from calendarapp import app, db, bcrypt
 from calendarapp.models import User, Event
 from flask_login import login_user, current_user, logout_user, login_required
 import datetime
+import math
 
 month_to_num = {
         "January" : 1,
@@ -95,8 +96,11 @@ def get_mon_day(day, year):
 
 print(get_mon_day(17, 2020))
 
-def get_week(year, week):
+def get_week(year, d, month):
+
     c = get_c(year)
+    day -= c
+    return math.ceil(day/7)
 
 
 
@@ -176,5 +180,9 @@ def add_event(year, month, day):
         db.session.add(event)
         db.session.commit()
         flash("Event added", "info")
-        return redirect(url_for("home"))
+        next_page = request.args.get("next")
+        if next_page:
+            return redirect(next_page)
+        else:
+            return redirect(url_for("home"))
     return render_template("add_event.html", form=form)
