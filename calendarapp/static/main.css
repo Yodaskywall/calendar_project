@@ -14,10 +14,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .wholeday {
   background-color: #F00;
+  margin-left:0px;
+  padding-left:0px;
+  width:100%;
+  height:100%;
+}
+
+.daylabel {
+  margin-left:10px;
+  margin-right:10px;
 }
 
 .event {
-  background-color: #0F0;
+  background-color: #7FDBFF;
+  margin-right:20px;
+  padding-left:0px;
+  padding-right:0px;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -28,10 +40,23 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
+.timecol {
+  margin-right:20px;
+  padding-right:0px;
+  background-color: #DDDDDD;
+}
+
+.timecol p {
+  margin-right:0px;
+  padding-right:0px;
+  margin-left:10px;
+}
+
 .daycol {
-  background-color: #CEECF5;
-  margin-left: 20px;
-  padding-bottom: 40%;
+  background-color: #0074D9;
+  margin-right: 20px;
+  padding-left:0px;
+  padding-right:0px;
 }
 
 .site-header .navbar-nav .nav-link.active {

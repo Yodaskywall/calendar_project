@@ -1,17 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
 	<h1> {{ info.year }} </h1>
+	{% for i in range(25) %}
 	<div class="row">
+		{% if i == 0 %}
+		<div class="h-100 col-sm timecol">
+			<h3> Time </h3>
+		</div>
 		{% for day, month in info.days %}
-			<div class="h-100 col-md daycol">
+			<div class="h-100 col-sm daycol">
+			<div class="daylabel">
 			<h2> {{ month }} </h2>
 			<h3> {{ day }} </h3>
-			<div class="wholeday">
-				<p>dsadsa</p>
 			</div>
-			<a type="button" href="{{ url_for("add_event", year=info.year, day=day, month=info.mons[loop.index0], next=request.path ) }}" class="btn btn-outline-primary">Add event</a>
 			</div>
 		{% endfor %}
+		{% else %}
+		<div class="h-100 col-sm timecol">
+			{% if i < 10 %}
+			<p>{{ "0" + i|string + ":00" }}</p>
+			{% else %}
+			<p>{{ i|string + ":00" }}</p>
+			{% endif %}
+		</div>
+		{% for day, month in info.days %}
+			<div class="h-100 col-sm event">
+				<p> dasd </p>
+			</div>
+		{% endfor %}
+		{% endif %}
 	</div>
+	{% endfor %}
 
 {% endblock content %}
