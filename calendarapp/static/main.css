@@ -1,10 +1,10 @@
 body {
-  background: #fafafa;
+  background: #fff5d7;
   color: #333333;
   margin-top: 5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h5, h6 {
   color: #444444;
 }
 
@@ -25,11 +25,42 @@ h1, h2, h3, h4, h5, h6 {
   margin-right:10px;
 }
 
-.event {
-  background-color: #7FDBFF;
+.daylabel h3, h4, h5 {
+  color: #2F1728;
+}
+
+.add-event {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  margin-bottom: 5px;
+
+}
+
+.add-event a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.no-event {
+  background-color: #ffaaab;
   margin-right:20px;
   padding-left:0px;
   padding-right:0px;
+  position: center;
+}
+
+.event {
+  background-color: #e86877;
+  margin-right: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.event p {
+  margin-left: 10px;
+  color: #2F1728;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -43,7 +74,6 @@ h1, h2, h3, h4, h5, h6 {
 .timecol {
   margin-right:20px;
   padding-right:0px;
-  background-color: #DDDDDD;
 }
 
 .timecol p {
@@ -53,10 +83,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .daycol {
-  background-color: #0074D9;
+  background-color: #ff5e6c;
   margin-right: 20px;
   padding-left:0px;
   padding-right:0px;
+}
+
+.botdiv {
+  margin-bottom: 50px;
 }
 
 .site-header .navbar-nav .nav-link.active {

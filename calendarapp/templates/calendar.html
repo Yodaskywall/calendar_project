@@ -10,8 +10,9 @@
 		{% for day, month in info.days %}
 			<div class="h-100 col-sm daycol">
 			<div class="daylabel">
-			<h2> {{ month }} </h2>
-			<h3> {{ day }} </h3>
+				<h3> {{ info.weekdays[loop.index-1] }}</h3>
+				<h4> {{ month }} {{ day }} </h4>
+				<div type="button" class="btn btn-small btn-warning add-event"> <a style="none" href="{{ url_for("add_event", year=info.year, day=day, month=info.mons[loop.index0], next=request.path ) }}">Add event</a></div>
 			</div>
 			</div>
 		{% endfor %}
@@ -24,12 +25,19 @@
 			{% endif %}
 		</div>
 		{% for day, month in info.days %}
+			{% if events[loop.index-1][i-1] %}
 			<div class="h-100 col-sm event">
-				<p> dasd </p>
+				<p> {{ events[loop.index-1][i-1].description }}</p>
 			</div>
+			{% else %}
+			<div class="h-100 col-sm no-event">
+				<p> - <p>
+			</div>
+			{% endif %}
 		{% endfor %}
 		{% endif %}
 	</div>
 	{% endfor %}
-
+	<div class="botdiv"></div>
 {% endblock content %}
+

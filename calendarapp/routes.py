@@ -9,6 +9,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 import datetime
 import math
 
+week_days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
 month_to_num = {
         "January" : 1,
         "February": 2,
@@ -94,7 +96,6 @@ def get_mon_day(day, year):
             else:
                 return day, month
 
-print(get_mon_day(17, 2020))
 
 def get_week(year, d, month):
 
@@ -161,12 +162,27 @@ def calendar(year, week):
             "year" : year,
             "week" : week,
             "days" : days,
-            "mons" : [month_to_num[m[1]] for m in days]
+            "mons" : [month_to_num[m[1]] for m in days],
+            "weekdays" : week_days
             }
 
+    events = {}
+    for dn in range(7):
+        events[dn] = []
+        for hr in range(1,25):
+            events[dn].append(None)
+    
+
+    for n, day in enumerate(days):
+        d = day[0]
+        m = month_to_num[day[1]]
+        for event in current_user.events:
+            if event.date.year == year and event.date.month == m and event.date.day == d:
+                for hr in range(event.date.hour-1, math.ceil(event.date.hour + (event.date.minute/60) + (event.duration.seconds/3600) - 1)):
+                    events[n][hr] = event
 
 
-    return render_template("calendar.html", info=info)
+    return render_template("calendar.html", info=info, events=events)
 
 
 @app.route("/add_event/<int:year>-<int:month>-<int:day>", methods=["GET", "POST"])
