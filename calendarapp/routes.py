@@ -100,7 +100,17 @@ def get_mon_day(day, year):
 def get_week(year, d, month):
 
     c = get_c(year)
-    day -= c
+    day = -c
+
+    for mon in range(1,13):
+        if mon < month:
+            if mon == 2 and year % 4 == 0:
+                day += 29
+            else:
+                day += month_len[mon]
+
+    day += d
+
     return math.ceil(day/7)
 
 
@@ -108,7 +118,9 @@ def get_week(year, d, month):
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    current_date = datetime.datetime.now()
+    week = get_week(current_date.year, current_date.day, current_date.month)
+    return redirect(url_for("calendar", year=current_date.year, week=week))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -144,8 +156,11 @@ def login():
 @login_required
 def calendar(year, week):
     day_n = week * 7 - get_c(year)
-    days = [[get_mon_day(d, year)[0],
-       num_to_month[get_mon_day(d, year)[1]]] for d in range(day_n+1, day_n+8)]
+    try:
+        days = [[get_mon_day(d, year)[0],
+        num_to_month[get_mon_day(d, year)[1]]] for d in range(day_n+1, day_n+8)]
+    except:
+        return redirect(url_for("calendar", year=year+1, week=0))
     
     for i in range(len(days)):
         if days[i][0] <= 0:

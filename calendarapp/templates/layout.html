@@ -14,6 +14,11 @@
 </head>
 <body>
 	<div class="container">
+	  {% if current_user.is_authenticated %}
+	  <div type="button" class="btn btn-sm logout btn-danger">
+		  <a href="{{ url_for("login") }}">Logout</a>
+	  </div>
+	  {% endif %}
           {% block content %}{% endblock %}
 	</div>
 

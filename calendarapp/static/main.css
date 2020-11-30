@@ -8,6 +8,20 @@ h1, h2, h5, h6 {
   color: #444444;
 }
 
+.logout {
+  text-align: right;
+  text-decoration: none;
+}
+
+.top-col {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.top-col svg {
+  margin-top: 8px;
+}
+
 .bg-steel {
   background-color: #5f788a;
 }
