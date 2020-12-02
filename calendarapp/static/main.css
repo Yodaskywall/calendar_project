@@ -1,8 +1,9 @@
 body {
-  background: #fff5d7;
+  background: #F5FFFA;
   color: #333333;
   margin-top: 5rem;
 }
+
 
 h1, h2, h5, h6 {
   color: #444444;
@@ -11,6 +12,11 @@ h1, h2, h5, h6 {
 .logout {
   text-align: right;
   text-decoration: none;
+}
+
+.logout a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .top-col {
@@ -40,7 +46,7 @@ h1, h2, h5, h6 {
 }
 
 .daylabel h3, h4, h5 {
-  color: #2F1728;
+  color: #F5FFFA;
 }
 
 .add-event {
@@ -58,7 +64,7 @@ h1, h2, h5, h6 {
 }
 
 .no-event {
-  background-color: #ffaaab;
+  background-color: #8EDFFF;
   margin-right:20px;
   padding-left:0px;
   padding-right:0px;
@@ -66,7 +72,8 @@ h1, h2, h5, h6 {
 }
 
 .event {
-  background-color: #e86877;
+  background-color: #00008B;
+  color: #F5FFFA;
   margin-right: 20px;
   padding-left: 0px;
   padding-right: 0px;
@@ -74,7 +81,6 @@ h1, h2, h5, h6 {
 
 .event p {
   margin-left: 10px;
-  color: #2F1728;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -97,7 +103,7 @@ h1, h2, h5, h6 {
 }
 
 .daycol {
-  background-color: #ff5e6c;
+  background-color: #23b2ee ;
   margin-right: 20px;
   padding-left:0px;
   padding-right:0px;
@@ -165,3 +171,4 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+

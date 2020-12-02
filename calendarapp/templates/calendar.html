@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 	<div class="row">
-	<div class="col-sm top-col">
+	<div class="col-sm-3 top-col">
 		{% if info.week == 0 %}
 		<a href="{{ url_for("calendar", year=info.year-1, week=51) }}">
 		{% else %}
@@ -10,13 +10,18 @@
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M15.28 5.22a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 000 1.06l6.25 6.25a.75.75 0 101.06-1.06L9.56 12l5.72-5.72a.75.75 0 000-1.06z"></path></svg>
 		</a>
 	</div>
-	<div class="col-sm top-col">
+	<div class="col-sm-4 top-col">
 	<h1> {{ info.year }} </h1>
 	</div>
-	<div class="col-sm top-col">
+	<div class="col-sm-3 top-col">
 		<a href="{{ url_for("calendar", year=info.year, week=info.week+1) }}">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.72 18.78a.75.75 0 001.06 0l6.25-6.25a.75.75 0 000-1.06L9.78 5.22a.75.75 0 00-1.06 1.06L14.44 12l-5.72 5.72a.75.75 0 000 1.06z"></path></svg>
 		</a>
+	</div>
+	<div class="col-sm-2 top-col">
+	  <div type="button" class="btn logout btn-outline-danger">
+		  <a href="{{ url_for("logout") }}">Logout</a>
+	  </div>
 	</div>
 	</div>
 	{% for i in range(25) %}
@@ -30,7 +35,7 @@
 			<div class="daylabel">
 				<h3> {{ info.weekdays[loop.index-1] }}</h3>
 				<h4> {{ month }} {{ day }} </h4>
-				<div type="button" class="btn btn-small btn-warning add-event"> <a style="none" href="{{ url_for("add_event", year=info.year, day=day, month=info.mons[loop.index0], next=request.path ) }}">Add event</a></div>
+				<div type="button" class="btn btn-small btn-outline-light add-event"> <a style="none" href="{{ url_for("add_event", year=info.year, day=day, month=info.mons[loop.index0], next=request.path ) }}">Add event</a></div>
 			</div>
 			</div>
 		{% endfor %}

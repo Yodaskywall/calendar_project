@@ -217,3 +217,9 @@ def add_event(year, month, day):
         else:
             return redirect(url_for("home"))
     return render_template("add_event.html", form=form)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
