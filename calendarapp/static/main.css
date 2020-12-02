@@ -65,22 +65,24 @@ h1, h2, h5, h6 {
 
 .no-event {
   background-color: #8EDFFF;
+  text-align: center;
   margin-right:20px;
   padding-left:0px;
   padding-right:0px;
   position: center;
+  color: #F5FFFA;
 }
 
 .event {
-  background-color: #00008B;
+  background-color: #23b2ee ;
   color: #F5FFFA;
+  text-align: center;
   margin-right: 20px;
   padding-left: 0px;
   padding-right: 0px;
 }
 
 .event p {
-  margin-left: 10px;
 }
 
 .site-header .navbar-nav .nav-link {
